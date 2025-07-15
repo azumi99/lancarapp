@@ -3,17 +3,24 @@ import gluestackPlugin from '@gluestack-ui/nativewind-utils/tailwind-plugin';
 /** @type {import('tailwindcss').Config} */
 module.exports = {
     darkMode: "media",
-    content: ["app/**/*.{tsx,jsx,ts,js}", "components/**/*.{tsx,jsx,ts,js}"],
+    content: ["app/**/*.{tsx,jsx,ts,js}", "src/**/*.{tsx,jsx,ts,js}", "components/**/*.{tsx,jsx,ts,js}"],
     presets: [require('nativewind/preset')],
     safelist: [
         {
             pattern:
                 /(bg|border|text|stroke|fill)-(primary|secondary|tertiary|error|success|warning|info|typography|outline|background|indicator)-(0|50|100|200|300|400|500|600|700|800|900|950|white|gray|black|error|warning|muted|success|info|light|dark|primary)/,
         },
+        // Tambahkan safelist untuk Tailwind colors standar
+        {
+            pattern:
+                /(bg|border|text|stroke|fill)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900)/,
+        },
     ],
     theme: {
         extend: {
+            // Tambahkan custom colors sebagai extension, bukan replacement
             colors: {
+                // Custom Gluestack colors (tetap ada)
                 primary: {
                     0: 'rgb(var(--color-primary-0)/<alpha-value>)',
                     50: 'rgb(var(--color-primary-50)/<alpha-value>)',

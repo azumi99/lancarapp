@@ -1,6 +1,6 @@
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router } from 'expo-router';
+import { useRouter } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect, useRef, useState } from 'react';
 import { Animated, Image, Text, View } from 'react-native';
@@ -8,6 +8,7 @@ import { Animated, Image, Text, View } from 'react-native';
 export default function Splash() {
     const [isReady, setIsReady] = useState(false);
     const fadeAnim = useRef(new Animated.Value(1)).current;
+    const router = useRouter();
 
     useEffect(() => {
         async function prepare() {
@@ -34,7 +35,7 @@ export default function Splash() {
         if (isReady) {
             SplashScreen.hideAsync();
             setTimeout(() => {
-                router.replace('/(tabs)');
+                router.replace('/(FirstScreen)/book');
             }, 100);
         }
     }, [isReady]);

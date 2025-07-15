@@ -1,7 +1,7 @@
 import { View } from '@/components/ui/view';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React from 'react';
-import { Platform, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface SafeAreaCustomProps {
@@ -21,30 +21,27 @@ const SafeAreaCustom: React.FC<SafeAreaCustomProps> = ({
 }) => {
   const colorMode = useColorScheme();
   const insets = useSafeAreaInsets();
+
+  const statusBarBg =
+    customBg && colorBg
+      ? colorBg
+      : colorMode === 'light'
+        ? 'white'
+        : 'black';
+
   return (
     <>
-      {bacgroundHeader
-        ? Platform.OS === 'ios' && (
-          <View
-
-            className={`
-                  ${bacgroundHeader
-                ? 'bg-blue-500'
-                : colorMode === 'light'
-                  ? 'bg-white'
-                  : 'bg-black'
-              }
-                  p-4 rounded-lg h-${insets.top}
-                `}
-
-          />
-        )
-        : null}
+      {/* Status bar background (for Android or manual control) */}
+      <View
+        style={{
+          height: insets.top,
+          backgroundColor: bacgroundHeader ? 'rgb(59 130 246)' : statusBarBg, // blue-500 or theme-based
+        }}
+      />
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor:
-            colorMode === 'light' ? (customBg ? colorBg : 'white') : 'black',
+          backgroundColor: bacgroundHeader ? 'rgb(59 130 246)' : statusBarBg,
         }}>
         {children}
       </SafeAreaView>
