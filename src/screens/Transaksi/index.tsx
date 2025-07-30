@@ -1,13 +1,16 @@
 import HeaderComponent from "@/components/headerComponent";
 import SafeAreaCustom from "@/components/safeArea";
+import { Heading } from "@/components/ui/heading";
 import { Icon } from "@/components/ui/icon";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
+import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
+import { VStack } from "@/components/ui/vstack";
 import { IconAdjustmentsHorizontal, IconArrowLeft, IconChevronLeft, IconChevronRight, IconSearch } from "@tabler/icons-react-native";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { Image, ScrollView } from "react-native";
 
 
 const TransactionScreen = () => {
@@ -50,9 +53,9 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 4.500.000',
             totalExpense: 'Rp 50.000',
             transactions: [
-                { type: 'expense', icon: '🥘', title: 'Membeli Sarapan', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 50.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
-                { type: 'income', icon: '💰', title: 'Gaji Bulan Mei', category: 'Salary', method: 'Uang Cash', amount: 'Rp 4.500.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
-                { type: 'expense', icon: '↔️', title: 'Transfer dari Bank BCA ke Mandiri', category: 'Bank BCA → Bank Mandiri', method: '', amount: 'Rp 2.500.000', iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+                { id: 1, type: 'expense', icon: '🥘', title: 'Membeli Sarapan', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 50.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
+                { id: 2, type: 'income', icon: '💰', title: 'Gaji Bulan Mei', category: 'Salary', method: 'Uang Cash', amount: 'Rp 4.500.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
+                { id: 3, type: 'expense', icon: '↔️', title: 'Transfer dari Bank BCA ke Mandiri', category: 'Bank BCA → Bank Mandiri', method: '', amount: 'Rp 2.500.000', iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
             ]
         },
         {
@@ -60,10 +63,10 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 0',
             totalExpense: 'Rp 190.000',
             transactions: [
-                { type: 'expense', icon: '🥘', title: 'Makan Siang', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 125.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
-                { type: 'expense', icon: '☕', title: 'Membeli Kopi', category: 'Beverage', method: 'Uang Cash', amount: 'Rp 15.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
-                { type: 'expense', icon: '🥘', title: 'Sarapan', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
-                { type: 'expense', icon: '🍔', title: 'Snack Pagi', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
+                { id: 4, type: 'expense', icon: '🥘', title: 'Makan Siang', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 125.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
+                { id: 5, type: 'expense', icon: '☕', title: 'Membeli Kopi', category: 'Beverage', method: 'Uang Cash', amount: 'Rp 15.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
+                { id: 6, type: 'expense', icon: '🥘', title: 'Sarapan', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
+                { id: 7, type: 'expense', icon: '🍔', title: 'Snack Pagi', category: 'Makanan', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
             ]
         },
         {
@@ -71,10 +74,10 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 0',
             totalExpense: 'Rp 755.000',
             transactions: [
-                { type: 'expense', icon: '👕', title: 'Membeli Baju', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 500.000', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-                { type: 'expense', icon: '🥘', title: 'Makan Siang', category: 'Food', method: 'Uang Cash', amount: 'Rp 75.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
-                { type: 'expense', icon: '🛒', title: 'Beli Bahan Makanan', category: 'Grocery', method: 'Uang Cash', amount: 'Rp 150.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
-                { type: 'expense', icon: '☕', title: 'Minum Kopi', category: 'Beverage', method: 'Uang Cash', amount: 'Rp 30.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
+                { id: 8, type: 'expense', icon: '👕', title: 'Membeli Baju', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 500.000', iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
+                { id: 9, type: 'expense', icon: '🥘', title: 'Makan Siang', category: 'Food', method: 'Uang Cash', amount: 'Rp 75.000', iconBg: 'bg-red-100', iconColor: 'text-red-600' },
+                { id: 10, type: 'expense', icon: '🛒', title: 'Beli Bahan Makanan', category: 'Grocery', method: 'Uang Cash', amount: 'Rp 150.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
+                { id: 11, type: 'expense', icon: '☕', title: 'Minum Kopi', category: 'Beverage', method: 'Uang Cash', amount: 'Rp 30.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
             ]
         },
         {
@@ -82,9 +85,9 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 500.000',
             totalExpense: 'Rp 125.000',
             transactions: [
-                { type: 'expense', icon: '🍟', title: 'Kentang Goreng', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
-                { type: 'expense', icon: '🍽️', title: 'Makan Malam', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-                { type: 'income', icon: '💼', title: 'Freelance', category: 'Income', method: 'Uang Cash', amount: 'Rp 500.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
+                { id: 12, type: 'expense', icon: '🍟', title: 'Kentang Goreng', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-orange-100', iconColor: 'text-orange-600' },
+                { id: 13, type: 'expense', icon: '🍽️', title: 'Makan Malam', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
+                { id: 14, type: 'income', icon: '💼', title: 'Freelance', category: 'Income', method: 'Uang Cash', amount: 'Rp 500.000', iconBg: 'bg-green-100', iconColor: 'text-green-600' },
             ]
         },
         {
@@ -92,8 +95,8 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 0',
             totalExpense: 'Rp 125.000',
             transactions: [
-                { type: 'expense', icon: '🍔', title: 'Makan Siang', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
-                { type: 'expense', icon: '🍞', title: 'Sarapan', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-brown-100', iconColor: 'text-brown-600' },
+                { id: 15, type: 'expense', icon: '🍔', title: 'Makan Siang', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
+                { id: 16, type: 'expense', icon: '🍞', title: 'Sarapan', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-brown-100', iconColor: 'text-brown-600' },
             ]
         },
         {
@@ -101,11 +104,12 @@ const TransactionScreen = () => {
             totalIncome: 'Rp 0',
             totalExpense: 'Rp 125.000',
             transactions: [
-                { type: 'expense', icon: '🍔', title: 'Makan Siang', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
-                { type: 'expense', icon: '🍞', title: 'Sarapan', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-brown-100', iconColor: 'text-brown-600' },
+                { id: 17, type: 'expense', icon: '🍔', title: 'Makan Siang', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 25.000', iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' },
+                { id: 18, type: 'expense', icon: '🍞', title: 'Sarapan', category: 'Shopping', method: 'Uang Cash', amount: 'Rp 100.000', iconBg: 'bg-brown-100', iconColor: 'text-brown-600' },
             ]
         },
     ];
+
     return (
         <SafeAreaCustom>
             <HeaderComponent iconLeft={IconArrowLeft} title="Transaksi" boorderless handleLeft={() => router.back()} roundedIconRight iconRight={IconAdjustmentsHorizontal} styleRight="p-3 bg-white rounded-2xl border border-gray-200 shadow" />
@@ -142,7 +146,7 @@ const TransactionScreen = () => {
                         <Text className="text-gray-800 font-bold text-base">Rp 3.145.000</Text>
                     </View>
                 </View>
-                {currentStickyHeader >= 0 && (
+                {currentStickyHeader >= 0 && transactionData.length > 0 && (
                     <View className="bg-white border-b border-gray-200 shadow-sm px-4 py-3 relative z-30">
                         <View className="flex-row justify-between items-center">
                             <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">
@@ -157,48 +161,60 @@ const TransactionScreen = () => {
                         </View>
                     </View>
                 )}
-
                 <ScrollView
                     showsVerticalScrollIndicator={false}
                     onScroll={handleScroll}
                     scrollEventThrottle={16}
-
                 >
-                    {transactionData.map((dayData, dayIndex) => (
-                        <React.Fragment key={dayIndex}>
-                            <View
-                                className=" px-4 py-2 bg-gray-50"
-                                style={{
-                                    opacity: currentStickyHeader === dayIndex ? 0 : 1,
-                                }}
-                                onLayout={(event) => onSectionLayout(dayIndex, event)}
-                            >
-                                <View className='flex-row justify-between items-center' style={{
-                                    display: currentStickyHeader === dayIndex ? 'none' : 'flex',
-                                }}>
-                                    <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">{dayData.date}</Text>
-                                    <Text className="text-green-600 font-bold text-sm">{dayData.totalIncome}</Text>
-                                    <Text className="text-red-600 font-bold text-sm">{dayData.totalExpense}</Text>
-                                </View>
-                            </View>
-                            {dayData.transactions.map((transaction, transactionIndex) => (
-                                <View key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
-                                    <View className="flex-row items-center">
-                                        <View className={`w-10 h-10 ${transaction.iconBg} rounded-full items-center justify-center mr-3`}>
-                                            <Text className={`${transaction.iconColor} text-lg`}>{transaction.icon}</Text>
-                                        </View>
-                                        <View className="flex-1">
-                                            <View className="flex-row justify-between items-center mb-1">
-                                                <Text className="text-gray-800 font-medium">{transaction.title}</Text>
-                                                <Text className={`${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'} font-bold`}>{transaction.amount}</Text>
-                                            </View>
-                                            <Text className="text-gray-500 text-xs">{transaction.category} {transaction.method ? `• ${transaction.method}` : ''}</Text>
-                                        </View>
+
+                    {transactionData.length > 0
+                        ? transactionData.map((dayData, dayIndex) => (
+                            <React.Fragment key={dayIndex}>
+                                <View
+                                    className=" px-4 py-2 bg-gray-50"
+                                    style={{
+                                        opacity: currentStickyHeader === dayIndex ? 0 : 1,
+                                    }}
+                                    onLayout={(event) => onSectionLayout(dayIndex, event)}
+                                >
+                                    <View className='flex-row justify-between items-center' style={{
+                                        display: currentStickyHeader === dayIndex ? 'none' : 'flex',
+                                    }}>
+                                        <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">{dayData.date}</Text>
+                                        <Text className="text-green-600 font-bold text-sm">{dayData.totalIncome}</Text>
+                                        <Text className="text-red-600 font-bold text-sm">{dayData.totalExpense}</Text>
                                     </View>
                                 </View>
-                            ))}
-                        </React.Fragment>
-                    ))}
+                                {dayData.transactions.map((transaction, transactionIndex) => (
+                                    <Pressable onPress={() => router.push(`/Transaksi/${transaction.id}`)} key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
+                                        <View className="flex-row items-center">
+                                            <View className={`w-10 h-10 ${transaction.iconBg} rounded-full items-center justify-center mr-3`}>
+                                                <Text className={`${transaction.iconColor} text-lg`}>{transaction.icon}</Text>
+                                            </View>
+                                            <View className="flex-1">
+                                                <View className="flex-row justify-between items-center mb-1">
+                                                    <Text className="text-gray-800 font-medium">{transaction.title}</Text>
+                                                    <Text className={`${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'} font-bold`}>{transaction.amount}</Text>
+                                                </View>
+                                                <Text className="text-gray-500 text-xs">{transaction.category} {transaction.method ? `• ${transaction.method}` : ''}</Text>
+                                            </View>
+                                        </View>
+                                    </Pressable>
+                                ))}
+                            </React.Fragment>
+                        ))
+
+                        :
+                        <View className="mt-10 items-center justify-center ">
+                            <Image source={require('@/assets/images/notfound.png')} style={{ width: 50, height: 50 }} />
+                            <VStack className='items-center mt-4' space='xs'>
+                                <Heading >Belum ada data Transaksi</Heading>
+                                <Text>Anda belum melakukan transaksi bulan ini.</Text>
+                            </VStack>
+                        </View>
+                    }
+
+
                     <View className="h-20" />
                 </ScrollView>
             </View>

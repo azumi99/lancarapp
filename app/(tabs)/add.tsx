@@ -1,5 +1,6 @@
-import { useTabBar } from '@/app/(tabs)/TabBarContext.tsx';
+import { useTabBar } from '@/src/store/TabBarContext';
 import { Button, SafeAreaView } from "react-native";
+;
 const AddScreen = () => {
     const { hideTabBar, showTabBar } = useTabBar();
     return (

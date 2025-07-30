@@ -27,8 +27,10 @@ import {
 } from '@tabler/icons-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { useTabBar } from '@/app/(tabs)/TabBarContext.tsx';
+import { Heading } from '@/components/ui/heading';
 import { Icon } from '@/components/ui/icon';
+import { VStack } from '@/components/ui/vstack';
+import { useTabBar } from '@/src/store/TabBarContext';
 import { useRouter } from 'expo-router';
 import { GestureHandlerRootView, PanGestureHandler } from 'react-native-gesture-handler';
 import Animated, {
@@ -168,6 +170,7 @@ const HomeScreen = () => {
     };
 
     const transactionData = [
+
         {
             date: '05 Senin',
             totalIncome: 'Rp 4.500.000',
@@ -385,7 +388,7 @@ const HomeScreen = () => {
                         </Animated.View>
                     </PanGestureHandler>
 
-                    {currentStickyHeader >= 0 && (
+                    {currentStickyHeader >= 0 && transactionData.length > 0 && (
                         <View className="bg-white border-b border-gray-200 shadow-sm px-4 py-3 relative z-30">
                             <View className="flex-row justify-between items-center">
                                 <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">
@@ -402,46 +405,61 @@ const HomeScreen = () => {
                     )}
 
                     <Animated.View style={{ flex: 1 }}>
+
                         <ScrollView
                             showsVerticalScrollIndicator={false}
                             onScroll={handleScroll}
                             scrollEventThrottle={16}
                         >
-                            {transactionData.map((dayData, dayIndex) => (
-                                <React.Fragment key={dayIndex}>
-                                    <View
-                                        className=" px-4 py-2 bg-gray-50"
-                                        style={{
-                                            opacity: currentStickyHeader === dayIndex ? 0 : 1,
-                                        }}
-                                        onLayout={(event) => onSectionLayout(dayIndex, event)}
-                                    >
-                                        <View className='flex-row justify-between items-center' style={{
-                                            display: currentStickyHeader === dayIndex ? 'none' : 'flex',
-                                        }}>
-                                            <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">{dayData.date}</Text>
-                                            <Text className="text-green-600 font-bold text-sm">{dayData.totalIncome}</Text>
-                                            <Text className="text-red-600 font-bold text-sm">{dayData.totalExpense}</Text>
-                                        </View>
-                                    </View>
-                                    {dayData.transactions.map((transaction, transactionIndex) => (
-                                        <View key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
-                                            <View className="flex-row items-center">
-                                                <View className={`w-10 h-10 ${transaction.iconBg} rounded-full items-center justify-center mr-3`}>
-                                                    <Text className={`${transaction.iconColor} text-lg`}>{transaction.icon}</Text>
-                                                </View>
-                                                <View className="flex-1">
-                                                    <View className="flex-row justify-between items-center mb-1">
-                                                        <Text className="text-gray-800 font-medium">{transaction.title}</Text>
-                                                        <Text className={`${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'} font-bold`}>{transaction.amount}</Text>
-                                                    </View>
-                                                    <Text className="text-gray-500 text-xs">{transaction.category} {transaction.method ? `• ${transaction.method}` : ''}</Text>
-                                                </View>
+
+                            {transactionData.length > 0
+                                ? transactionData.map((dayData, dayIndex) => (
+                                    <React.Fragment key={dayIndex}>
+                                        <View
+                                            className=" px-4 py-2 bg-gray-50"
+                                            style={{
+                                                opacity: currentStickyHeader === dayIndex ? 0 : 1,
+                                            }}
+                                            onLayout={(event) => onSectionLayout(dayIndex, event)}
+                                        >
+                                            <View className='flex-row justify-between items-center' style={{
+                                                display: currentStickyHeader === dayIndex ? 'none' : 'flex',
+                                            }}>
+                                                <Text className="bg-gray-700 text-white text-xs rounded-md px-2 py-1 font-medium">{dayData.date}</Text>
+                                                <Text className="text-green-600 font-bold text-sm">{dayData.totalIncome}</Text>
+                                                <Text className="text-red-600 font-bold text-sm">{dayData.totalExpense}</Text>
                                             </View>
                                         </View>
-                                    ))}
-                                </React.Fragment>
-                            ))}
+                                        {dayData.transactions.map((transaction, transactionIndex) => (
+                                            <View key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
+                                                <View className="flex-row items-center">
+                                                    <View className={`w-10 h-10 ${transaction.iconBg} rounded-full items-center justify-center mr-3`}>
+                                                        <Text className={`${transaction.iconColor} text-lg`}>{transaction.icon}</Text>
+                                                    </View>
+                                                    <View className="flex-1">
+                                                        <View className="flex-row justify-between items-center mb-1">
+                                                            <Text className="text-gray-800 font-medium">{transaction.title}</Text>
+                                                            <Text className={`${transaction.type === 'income' ? 'text-green-600' : 'text-red-600'} font-bold`}>{transaction.amount}</Text>
+                                                        </View>
+                                                        <Text className="text-gray-500 text-xs">{transaction.category} {transaction.method ? `• ${transaction.method}` : ''}</Text>
+                                                    </View>
+                                                </View>
+                                            </View>
+                                        ))}
+                                    </React.Fragment>
+                                ))
+
+                                :
+                                <View className="mt-10 items-center justify-center ">
+                                    <Image source={require('@/assets/images/notfound.png')} style={{ width: 50, height: 50 }} />
+                                    <VStack className='items-center mt-4' space='xs'>
+                                        <Heading >Belum ada data Transaksi</Heading>
+                                        <Text>Anda belum melakukan transaksi bulan ini.</Text>
+                                    </VStack>
+                                </View>
+                            }
+
+
                             <View className="h-20" />
                         </ScrollView>
                     </Animated.View>

@@ -2,9 +2,9 @@ import { Tabs } from 'expo-router';
 import React, { useRef } from 'react';
 import { Animated, Pressable, View } from 'react-native';
 
-import { TabBarContext } from '@/app/(tabs)/TabBarContext.tsx';
 import { Box } from '@/components/ui/box';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { TabBarContext } from '@/src/store/TabBarContext';
 import { IconChartHistogram, IconFileAnalytics, IconPlus, IconSettings2, IconSmartHome } from '@tabler/icons-react-native';
 
 export default function TabLayout() {
@@ -130,7 +130,7 @@ export default function TabLayout() {
           }}
         />
         <Tabs.Screen
-          name="profile/index"
+          name="profile"
           options={{
             title: 'Profile',
             tabBarIcon: ({ color, focused }) => <IconSettings2 size={24} color={color} strokeWidth={focused ? 2 : 1.5} />,
