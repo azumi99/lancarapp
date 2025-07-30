@@ -1,15 +1,21 @@
-import { Tabs } from 'expo-router';
-import React, { useRef } from 'react';
-import { Animated, Pressable, View } from 'react-native';
+import { Tabs } from "expo-router";
+import React, { useRef } from "react";
+import { Animated, Pressable, View } from "react-native";
 
-import { TabBarContext } from '@/app/(tabs)/TabBarContext.tsx';
-import { Box } from '@/components/ui/box';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import { IconChartHistogram, IconFileAnalytics, IconPlus, IconSettings2, IconSmartHome } from '@tabler/icons-react-native';
+import { TabBarContext } from "@/app/(tabs)/TabBarContext.tsx";
+import { Box } from "@/components/ui/box";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import {
+  IconChartHistogram,
+  IconFileAnalytics,
+  IconPlus,
+  IconSettings2,
+  IconSmartHome,
+} from "@tabler/icons-react-native";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const isDark = colorScheme === 'dark';
+  const isDark = colorScheme === "dark";
 
   const tabBarTranslateY = useRef(new Animated.Value(0)).current;
 
@@ -33,28 +39,30 @@ export default function TabLayout() {
     <TabBarContext.Provider value={{ showTabBar, hideTabBar }}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: '#2b7fff',
+          tabBarActiveTintColor: "#2b7fff",
           headerShown: false,
           tabBarBackground: () => (
-            <View style={{
-              flex: 1,
-              backgroundColor: isDark ? '#1c1c1e' : '#ffffff',
-              borderTopLeftRadius: 25,
-              borderTopRightRadius: 25,
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: -4 },
-              shadowOpacity: 2,
-              shadowRadius: 10,
-              elevation: 10,
-            }} />
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: isDark ? "#1c1c1e" : "#ffffff",
+                borderTopLeftRadius: 25,
+                borderTopRightRadius: 25,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: -4 },
+                shadowOpacity: 2,
+                shadowRadius: 10,
+                elevation: 10,
+              }}
+            />
           ),
           tabBarStyle: {
-            position: 'absolute',
+            position: "absolute",
             height: 80,
             borderTopLeftRadius: 25,
             borderTopRightRadius: 25,
-            backgroundColor: isDark ? '#1c1c1e' : '#ffffff',
-            shadowColor: '#000',
+            backgroundColor: isDark ? "#1c1c1e" : "#ffffff",
+            shadowColor: "#000",
             shadowOffset: { width: 0, height: -4 },
             shadowOpacity: isDark ? 0.4 : 0.1,
             shadowRadius: 10,
@@ -63,7 +71,7 @@ export default function TabLayout() {
           },
           tabBarLabelStyle: {
             fontSize: 12,
-            fontWeight: '500',
+            fontWeight: "500",
             marginTop: 4,
           },
           tabBarButton: ({ children, onPress, accessibilityState, style }) => (
@@ -72,48 +80,62 @@ export default function TabLayout() {
               style={style}
               onTouchStart={onPress}
             >
-              <View className="items-center justify-center">
-                {children}
-              </View>
+              <View className="items-center justify-center">{children}</View>
             </Pressable>
           ),
-        }}>
+        }}
+      >
         <Tabs.Screen
           name="index"
           options={{
-            title: 'Beranda',
-            tabBarIcon: ({ color, focused }) => <IconSmartHome size={24} color={color} strokeWidth={focused ? 2 : 1.5} />,
+            title: "Beranda",
+            tabBarIcon: ({ color, focused }) => (
+              <IconSmartHome
+                size={24}
+                color={color}
+                strokeWidth={focused ? 2 : 1.5}
+              />
+            ),
           }}
         />
         <Tabs.Screen
           name="grafik"
           options={{
-            title: 'Grafik',
-            tabBarIcon: ({ color, focused }) => <IconChartHistogram size={24} color={color} strokeWidth={focused ? 2 : 1.5} />,
+            title: "Grafik",
+            tabBarIcon: ({ color, focused }) => (
+              <IconChartHistogram
+                size={24}
+                color={color}
+                strokeWidth={focused ? 2 : 1.5}
+              />
+            ),
           }}
         />
         <Tabs.Screen
           name="add"
           options={{
-            title: 'Tambah',
+            title: "Tambah",
             tabBarIcon: ({ color, focused }) => {
-              const colorScheme = useColorScheme();
-              const isDark = colorScheme === 'dark';
+              const isDark = colorScheme === "dark";
 
               return (
                 <Box
-                  className={`items-center justify-center w-14 h-14 absolute -top-6 ${isDark ? 'bg-gray-700' : 'bg-gray-300'
-                    } rounded-[20px] shadow-xl`}
+                  className={`items-center justify-center w-14 h-14 absolute -top-6 ${
+                    isDark ? "bg-gray-700" : "bg-gray-300"
+                  } rounded-[20px] shadow-xl`}
                 >
                   <Box
-                    className={`items-center justify-center w-14 h-14 absolute -top-1 ${isDark ? 'bg-blue-500' : 'bg-blue-500'
-                      } rounded-[20px] border-4 ${isDark ? 'border-gray-900' : 'border-white'
-                      } shadow-xl ${isDark ? 'shadow-black/40' : 'shadow-gray-300'
-                      }`}
+                    className={`items-center justify-center w-14 h-14 absolute -top-1 ${
+                      isDark ? "bg-blue-500" : "bg-blue-500"
+                    } rounded-[20px] border-4 ${
+                      isDark ? "border-gray-900" : "border-white"
+                    } shadow-xl ${
+                      isDark ? "shadow-black/40" : "shadow-gray-300"
+                    }`}
                   >
                     <IconPlus
                       size={24}
-                      color={'white'}
+                      color={"white"}
                       strokeWidth={focused ? 2.5 : 2}
                     />
                   </Box>
@@ -125,15 +147,27 @@ export default function TabLayout() {
         <Tabs.Screen
           name="laporan"
           options={{
-            title: 'Laporan',
-            tabBarIcon: ({ color, focused }) => <IconFileAnalytics size={24} color={color} strokeWidth={focused ? 2 : 1.5} />,
+            title: "Laporan",
+            tabBarIcon: ({ color, focused }) => (
+              <IconFileAnalytics
+                size={24}
+                color={color}
+                strokeWidth={focused ? 2 : 1.5}
+              />
+            ),
           }}
         />
         <Tabs.Screen
-          name="profile/index"
+          name="profile"
           options={{
-            title: 'Profile',
-            tabBarIcon: ({ color, focused }) => <IconSettings2 size={24} color={color} strokeWidth={focused ? 2 : 1.5} />,
+            title: "Profile",
+            tabBarIcon: ({ color, focused }) => (
+              <IconSettings2
+                size={24}
+                color={color}
+                strokeWidth={focused ? 2 : 1.5}
+              />
+            ),
           }}
         />
       </Tabs>
