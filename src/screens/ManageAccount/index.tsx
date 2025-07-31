@@ -27,7 +27,7 @@ import {
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Feather from "react-native-vector-icons/Feather";
 
-const ProfileScreen = () => {
+const ManageAccount = () => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const gradientColors: [ColorValue, ColorValue] = isDark
@@ -198,4 +198,4 @@ const ProfileScreen = () => {
   );
 };
 
-export default ProfileScreen;
+export default ManageAccount;

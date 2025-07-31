@@ -1,4 +1,5 @@
 import CustomActionsheet from "@/components/customActionsheet";
+import AfterLogin from "@/components/headerSetting/afterLogin";
 import BeforeLogin from "@/components/headerSetting/beforeLogin";
 import SafeAreaCustom from "@/components/safeArea";
 import { Button, ButtonText } from "@/components/ui/button";
@@ -42,33 +43,15 @@ const ProfileScreen = () => {
   const [action, setAction] = useState(false);
   const handleClose = () => setAction(false);
   const [rateUs, setRateUs] = useState(false);
+  const [user, setUser] = useState(true);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaCustom>
         <ScrollView className="flex-1 px-6 py-10">
-          <View className="items-center">
-            <BeforeLogin />
-          </View>
-          <View className="items-center px-2">
-            <Text className="text-center  ">
-              Masuk atau buat akun untuk menyimpan progres kamu dan menjaga data
-              tetap aman di semua perangkat.
-            </Text>
-          </View>
+          {user ? <AfterLogin /> : <BeforeLogin />}
 
           <VStack space="md" className="mt-10">
-            <TouchableOpacity
-              className="bg-blue-500 py-2 rounded-xl w-full"
-              onPress={() => router.push("/profile/loginBarrier")}
-            >
-              <Text className="text-center text-white font-semibold text-lg">
-                Masuk / Daftar
-              </Text>
-            </TouchableOpacity>
-
-            {/* Baris 1 */}
-            {/* Baris 1 */}
             <HStack justifyContent="space-between" className="mx-2 mt-10">
               <VStack className="flex-1 items-center">
                 <TouchableOpacity className="items-center">
@@ -168,15 +151,19 @@ const ProfileScreen = () => {
               <LinearGradient
                 colors={gradientColors}
                 start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}
-                className="flex-1 rounded-2xl mt-50"
+                end={{ x: 1, y: 0 }}
+                style={{
+                  borderRadius: 16,
+                  padding: 2,
+                  marginTop: 40,
+                }}
               >
                 <HStack
                   style={{ justifyContent: "space-between" }}
                   className="m-4 "
                 >
                   <VStack className="w-80">
-                    <Text className="text-bold text-md">
+                    <Text className="font-semibold text-md">
                       Rekomendasikan ke Teman
                     </Text>
                     <Text className="text-sm text-gray-400">
