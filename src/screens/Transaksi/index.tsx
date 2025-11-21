@@ -1,22 +1,26 @@
 import HeaderComponent from "@/components/headerComponent";
 import SafeAreaCustom from "@/components/safeArea";
+import { Box } from "@/components/ui/box";
 import { Heading } from "@/components/ui/heading";
 import { Icon } from "@/components/ui/icon";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
-import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { VStack } from "@/components/ui/vstack";
+import FilterSheet from "@/src/screens/Transaksi/FilterSheet";
 import { IconAdjustmentsHorizontal, IconArrowLeft, IconChevronLeft, IconChevronRight, IconSearch } from "@tabler/icons-react-native";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { Image, ScrollView } from "react-native";
+import { Image, ScrollView, TouchableOpacity } from "react-native";
 
 
 const TransactionScreen = () => {
     const router = useRouter();
     const [currentStickyHeader, setCurrentStickyHeader] = useState(0);
     const [sectionOffsets, setSectionOffsets] = useState<number[]>([]);
+    const [showActionsheet, setShowActionsheet] = useState(false);
+    const [countFilter, setCountFilter] = useState(0);
+    console.log('Count Filter:', countFilter);
     const handleScroll = (event: any) => {
         const scrollY = event.nativeEvent.contentOffset.y;
 
@@ -112,7 +116,7 @@ const TransactionScreen = () => {
 
     return (
         <SafeAreaCustom>
-            <HeaderComponent iconLeft={IconArrowLeft} title="Transaksi" boorderless handleLeft={() => router.back()} roundedIconRight iconRight={IconAdjustmentsHorizontal} styleRight="p-3 bg-white rounded-2xl border border-gray-200 shadow" />
+            <HeaderComponent iconRightActive={countFilter > 0} customRightElement={<Box className="bg-red-500 px-2 py-1 rounded-lg"><Text className="text-xs text-white ">{countFilter}</Text></Box>} iconLeft={IconArrowLeft} title="Transaksi" boorderless handleLeft={() => router.back()} handleRight={() => setShowActionsheet(true)} roundedIconRight iconRight={IconAdjustmentsHorizontal} styleRight="p-3 bg-white rounded-2xl border border-gray-200 shadow" />
             <View className="flex-1">
                 <View className="px-4">
                     <Input
@@ -186,7 +190,7 @@ const TransactionScreen = () => {
                                     </View>
                                 </View>
                                 {dayData.transactions.map((transaction, transactionIndex) => (
-                                    <Pressable onPress={() => router.push(`/Transaksi/${transaction.id}`)} key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
+                                    <TouchableOpacity onPress={() => router.push(`/Transaksi/${transaction.id}`)} key={transactionIndex} className="px-4 py-3 border-b border-gray-100">
                                         <View className="flex-row items-center">
                                             <View className={`w-10 h-10 ${transaction.iconBg} rounded-full items-center justify-center mr-3`}>
                                                 <Text className={`${transaction.iconColor} text-lg`}>{transaction.icon}</Text>
@@ -199,7 +203,7 @@ const TransactionScreen = () => {
                                                 <Text className="text-gray-500 text-xs">{transaction.category} {transaction.method ? `• ${transaction.method}` : ''}</Text>
                                             </View>
                                         </View>
-                                    </Pressable>
+                                    </TouchableOpacity>
                                 ))}
                             </React.Fragment>
                         ))
@@ -217,6 +221,7 @@ const TransactionScreen = () => {
 
                     <View className="h-20" />
                 </ScrollView>
+                <FilterSheet showActionFilter={showActionsheet} handleClose={() => setShowActionsheet(false)} titleActionsheet="Filter" onFilterChange={(count) => setCountFilter(count)} />
             </View>
         </SafeAreaCustom>
     );

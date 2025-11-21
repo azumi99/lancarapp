@@ -1,9 +1,7 @@
 import {
     Actionsheet,
     ActionsheetBackdrop,
-    ActionsheetContent,
-    ActionsheetDragIndicator,
-    ActionsheetDragIndicatorWrapper,
+    ActionsheetContent
 } from "@/components/ui/actionsheet";
 import { Divider } from "@/components/ui/divider";
 import { Heading } from "@/components/ui/heading";
@@ -67,9 +65,9 @@ const WalletPickerSheet: React.FC<{
         <Actionsheet isOpen={isOpen} onClose={onClose}>
             <ActionsheetBackdrop />
             <ActionsheetContent>
-                <ActionsheetDragIndicatorWrapper>
+                {/* <ActionsheetDragIndicatorWrapper>
                     <ActionsheetDragIndicator />
-                </ActionsheetDragIndicatorWrapper>
+                </ActionsheetDragIndicatorWrapper> */}
 
                 <HStack className="w-full items-center justify-between py-3 ">
                     <View className="w-5" />

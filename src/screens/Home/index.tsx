@@ -49,7 +49,7 @@ import BookMenu from './menuBook';
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const SNAP_POINTS = {
-    collapsed: SCREEN_HEIGHT * 0.47,
+    collapsed: SCREEN_HEIGHT * 0.49,
     expanded: SCREEN_HEIGHT * 0.05,
 };
 

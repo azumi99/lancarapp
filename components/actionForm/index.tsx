@@ -1,9 +1,7 @@
 import {
     Actionsheet,
     ActionsheetBackdrop,
-    ActionsheetContent,
-    ActionsheetDragIndicator,
-    ActionsheetDragIndicatorWrapper,
+    ActionsheetContent
 } from "@/components/ui/actionsheet";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
@@ -50,9 +48,9 @@ const ActionForm: React.FC<ActionFormProps> = ({
             <ActionsheetBackdrop />
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"}>
                 <ActionsheetContent>
-                    <ActionsheetDragIndicatorWrapper>
+                    {/* <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
-                    </ActionsheetDragIndicatorWrapper>
+                    </ActionsheetDragIndicatorWrapper> */}
                     <HStack className="w-full items-center justify-between py-3">
                         <View className="w-5" />
                         <Heading className="text-center flex-1">{titleActionsheet}</Heading>

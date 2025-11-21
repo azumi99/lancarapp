@@ -1,4 +1,4 @@
-import { Actionsheet, ActionsheetBackdrop, ActionsheetContent, ActionsheetDragIndicator, ActionsheetDragIndicatorWrapper } from "@/components/ui/actionsheet";
+import { Actionsheet, ActionsheetBackdrop, ActionsheetContent } from "@/components/ui/actionsheet";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Divider } from "@/components/ui/divider";
 import { FormControl, FormControlLabel, FormControlLabelText } from "@/components/ui/form-control";
@@ -27,9 +27,9 @@ const ActionForm: React.FC<ActionFormProps> = ({ showActionsheet, handleClose, v
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
                 <ActionsheetContent>
-                    <ActionsheetDragIndicatorWrapper>
+                    {/* <ActionsheetDragIndicatorWrapper>
                         <ActionsheetDragIndicator />
-                    </ActionsheetDragIndicatorWrapper>
+                    </ActionsheetDragIndicatorWrapper> */}
                     <HStack className="w-full items-center justify-between py-3 px-4">
                         <View className="w-5" />
                         <Heading className="text-center flex-1">Nama Buku</Heading>

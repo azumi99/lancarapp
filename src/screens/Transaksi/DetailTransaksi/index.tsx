@@ -1,15 +1,18 @@
 import HeaderComponent from "@/components/headerComponent";
+import ModalDelete from "@/components/modalDelete";
 import SafeAreaCustom from "@/components/safeArea";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { View } from "@/components/ui/view";
 import { IconArrowLeft, IconEdit, IconTrash } from "@tabler/icons-react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { useState } from "react";
 import { Image, TouchableOpacity } from "react-native";
 
 const DetailTransaksi = () => {
     const router = useRouter();
     const { id } = useLocalSearchParams();
+    const [showModal, setShowModal] = useState(false);
 
     const transactionData = [
         {
@@ -361,13 +364,19 @@ const DetailTransaksi = () => {
 
                     <TouchableOpacity
                         className="flex-1 bg-white rounded-xl p-4 flex-row items-center justify-center border border-red-200"
-                        onPress={() => { }}
+                        onPress={() => setShowModal(true)}
                     >
                         <Icon as={IconTrash} size="sm" className="text-red-500 mr-2" />
                         <Text className="text-red-500 font-medium">Hapus</Text>
                     </TouchableOpacity>
                 </View>
             </View>
+
+            <ModalDelete
+                showModal={showModal}
+                setShowModal={setShowModal}
+            />
+
         </SafeAreaCustom>
     );
 };
